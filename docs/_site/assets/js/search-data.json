@@ -1,0 +1,166 @@
+{
+  
+  "0": {
+    "title": "",
+    "content": "404 . Page not found :( . The requested page could not be found. .",
+    "url": "http://localhost:4000/404.html",
+    "relUrl": "/404.html"
+  }
+  ,"1": {
+    "title": "Connect Reader",
+    "content": "Connect a Mobile Reader . Before connecting to a Miura reader, the reader must be paired to the Android device within the Settings app . In order to connect a mobile reader, you must first search for a list of available readers . Omni.shared().getAvailableReaders { readers -&gt; } . Once you have the list of available ones, you can choose which one you’d like to connect . Omni.shared().getAvailableReaders { readers -&gt; Omni.shared().connectReader(mobileReader, onConnected: { reader -&gt; // Reader is connected }, onFail: { error -&gt; // Error connecting reader } } . . Next: Take a Payment .",
+    "url": "http://localhost:4000/mobile-reader-payments/android/connect-reader",
+    "relUrl": "/mobile-reader-payments/android/connect-reader"
+  }
+  ,"2": {
+    "title": "Initialize",
+    "content": "Getting Started . Create an instance of InitParams . var initParams = InitParams(applicationContext, ephemeralApiKey, OmniApi.Environment.DEV) . Pass the initParams to Omni.initialize(...), along with a completion lambda and an error lambda . Omni.initialize(params, { // Success! System.out.println(&quot;Omni is initialized&quot;) }) { // There was an error } . You can now use Omni.shared() to get the instance of Omni that you will be using . . Next: Connect a Mobile Reader .",
+    "url": "http://localhost:4000/mobile-reader-payments/android/initialize",
+    "relUrl": "/mobile-reader-payments/android/initialize"
+  }
+  ,"3": {
+    "title": "Installation",
+    "content": "Installation . Jitpack . To install, . Add the JitPack repository to your build file | allprojects { repositories { ... maven { url &#39;https://jitpack.io&#39; } } } . Add the following line to your build.gradle file | implementation &#39;com.github.fattmerchantorg:fattmerchant-android-sdk:v1.0.4&#39; . . Next: Initialize Omni Object .",
+    "url": "http://localhost:4000/mobile-reader-payments/android/installation",
+    "relUrl": "/mobile-reader-payments/android/installation"
+  }
+  ,"4": {
+    "title": "Refund Payment",
+    "content": "Refund a Payment . To refund a payment, you must first get the Transaction that you want to refund. You can use the Omni API to do so. Once you get the transaction, you can use the refundMobileReaderTransaction method to attempt the refund. . At this time, you may only refund transactions that were performed on the same device that performed the original transaction . // Attain a transaction var transaction = Transaction() // Perform refund Omni.shared()?.refundMobileReaderTransaction(transaction, { // Refund successful! }) { // Error } .",
+    "url": "http://localhost:4000/mobile-reader-payments/android/refund-payment",
+    "relUrl": "/mobile-reader-payments/android/refund-payment"
+  }
+  ,"5": {
+    "title": "Take a Payment",
+    "content": "Take a Payment . To take a payment, simply create a TransactionRequest and pass it along to omni.takeMobileReaderTransaction(...) . // Create an Amount var amount = Amount(50) // Create the TransactionRequest var request = TransactionRequest(amount) // Take the payment Omni.shared()?.takeMobileReaderTransaction(request, { // Payment successful! }) { // Error } . . Next: Refund Payment .",
+    "url": "http://localhost:4000/mobile-reader-payments/android/take-payment",
+    "relUrl": "/mobile-reader-payments/android/take-payment"
+  }
+  ,"6": {
+    "title": "android",
+    "content": "Android Mobile Reader Payments Guide . Requirements . Android SDK Version 21+ | . . Get Started .",
+    "url": "http://localhost:4000/mobile-reader-payments/android",
+    "relUrl": "/mobile-reader-payments/android"
+  }
+  ,"7": {
+    "title": "Connect Reader",
+    "content": "Connect a Mobile Reader . Before connecting to a Miura reader, the reader must be paired to the iOS device within the Settings app . In order to connect a mobile reader, you must first search for a list of available readers . omni.getAvailableReaders { readers -&gt; } . Once you have the list of available ones, you can choose which one you’d like to connect . omni?.getAvailableReaders(completion: { readers in guard !readers.isEmpty else { self.log(&quot;No readers found&quot;) return } var chosenReader = ... // Choose a reader omni.connect(reader: chosenReader, completion: { connectedReader in self.log(&quot;Connected reader: (connectedReader)&quot;) }) { (error) in // Something went wrong } }) { self.log(&quot;Couldn&#39;t connect to the mobile reader&quot;) } . . Next: Take a Payment .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios/connect-reader",
+    "relUrl": "/mobile-reader-payments/ios/connect-reader"
+  }
+  ,"8": {
+    "title": "Initialize",
+    "content": "Getting Started . Setup Info.plist . In order to build and run with the Cardpresent functionality, you must include the following items in your project’s Info.plist . NSBluetoothAlwaysUsageDescription: Provide a value here to let your users know why Bluetooth access is required | UISupportedExternalAccessoryProtocols: Include and array of the following items here. These are the MobileReaders that the Omni Cardpresent SDK supports com.bbpost.bt.wisepad | com.miura.shuttle | com.datecs.pinpad | . | . Initialize . Create an instance of InitParams . var initParams = Omni.InitParams(appId: &quot;fmiossample&quot;, apiKey: apiKey, environment: Environment.DEV) . Pass the initParams to Omni.initialize(...), along with a completion lambda and an error lambda . omni = Omni() log(&quot;Attempting initalization...&quot;) // Initialize Omni omni?.initialize(params: initParams, completion: { // Initialized! }) { (error) in } . . Next: Connect a Mobile Reader .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios/initialize",
+    "relUrl": "/mobile-reader-payments/ios/initialize"
+  }
+  ,"9": {
+    "title": "Installation",
+    "content": "Installation . Use CocoaPods to install the Fattmerchant iOS SDK. . Install CocoaPods | Add pod &#39;Fattmerchant&#39; to your Podfile | Run pod install | . Next: Initialize Omni Object .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios/installation",
+    "relUrl": "/mobile-reader-payments/ios/installation"
+  }
+  ,"10": {
+    "title": "Refund Payment",
+    "content": "Refund a Payment . . You can use the Omni API to do so. Once you get the transaction, you can use the refundMobileReaderTransaction method to attempt the refund. . At this time, you may only refund transactions that were performed on the same device that performed the original transaction . // Attain a transaction var transaction = Transaction() // Perform refund omni.refundMobileReaderTransaction(transaction: transaction, completion: { (refundedTransaction) in // Refund successful! }, error: { error in // Error }) .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios/refund-payment",
+    "relUrl": "/mobile-reader-payments/ios/refund-payment"
+  }
+  ,"11": {
+    "title": "Take a Payment",
+    "content": "Take a Payment . To take a payment, simply create a TransactionRequest and pass it along to omni.takeMobileReaderTransaction(...) . // Create an Amount let amount = Amount(cents: 50) // Create the TransactionRequest let request = TransactionRequest(amount: amount) // Take the payment omni.takeMobileReaderTransaction(request, { completedTransaction in // Payment successful! }) { // Error } . . Next: Refund Payment .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios/take-payment",
+    "relUrl": "/mobile-reader-payments/ios/take-payment"
+  }
+  ,"12": {
+    "title": "ios",
+    "content": "iOS Mobile Reader Payments Guide . Requirements . Xcode 8+ | iOS 9+ | Omni Webpayments Token | Ephemeral Omni API key | . . Get Started .",
+    "url": "http://localhost:4000/mobile-reader-payments/ios",
+    "relUrl": "/mobile-reader-payments/ios"
+  }
+  ,"13": {
+    "title": "Mobile Reader Payments",
+    "content": "Mobile Reader Payments . In order to take mobile reader payments, you will need the following: . Ephemeral Omni API Key: Using your Omni API key, you will need to create an ephemeral token. The cardpresent codebase does not store your token, so you’ll need to pass one in every time you create the Omni object. Here is a helpful guide showing you how to create an ephemeral token | App Name: A name for your app! | Mobile Reader: A Fattmerchant-provided mobile reader | . Mobile Reader Payments for iOS Mobile Reader Payments for Android",
+    "url": "http://localhost:4000/mobile-reader-payments/",
+    "relUrl": "/mobile-reader-payments/"
+  }
+  ,"14": {
+    "title": "Home",
+    "content": "Omni Mobile SDK . Fattmerchant’s Omni Mobile SDK is a collection of SDKs allowing integration with the Fattmerchant platform for tokenizing card-not-present payment methods and taking mobile reader payments. . . Capabilities . Mobile Reader Payments . Supercharge your mobile app by quickly adding mobile reader payments using the Omni Mobile SDK. These payments will create invoices, customers, and transaction objects in the Omni platform. You can also choose to have the payment method stored within Omni so you can use it from the Omni API. . How it works . You’ll first need to create an ephemeral key to initialize the Omni object. | Then you’ll create a TransactionRequest that holds all necessary data to take a payment. | Finally, you’ll ask Omni to take the payment by calling the takeMobileReaderPayment() method, passing in the TransactionRequest and a block to run once the payment is complete | Mobile Reader Payment Guide . . Tokenization . The Omni Mobile SDK provides a simple way to accept a payment on your mobile app by providing tokenization of payment methods. By using these tokens instead of card and bank information, you no longer have to worry about sending sensitive card information to your server. . Note This feature facilitates payments when you have card data and not a Fattmerchant-provided mobile reader. If you do have a Fattmerchant-provided mobile reader, then see the Mobile Reader Payments section below . How it works . Collect card or bank account data. | Then pass the card/bank account data to the Omni Mobile SDK. This creates a PaymentMethod in Omni and returns the id. | Using the PaymentMethod id, you can now use the transaction/charge route in the Omni API to perform a transaction. | Tokenization Guide .",
+    "url": "http://localhost:4000/",
+    "relUrl": "/"
+  }
+  ,"15": {
+    "title": "Requirements & Limitations",
+    "content": "Requirements . All features of the Omni Mobile SDK are only available to Omni Merchants. | Must be developing a Native iOS App or a Native Android app | Must have access to the Omni API | . Limitations . Only Mobile Reader Payments and Payment Method Tokenization are available at this time. After tokenizing a payment method, you will need to run a payment through the Omni API using the payment method token. | Mobile Reader Payments do not capture signatures | All features require an active internet connection. Offline tokenization and payments are not supported | There is no support for Customers or itemized transactions in the SDKs. However, you can leverage the Omni API to create robust invoices rich with Customer and Catalog Item information. | There is no official support for React Native, Cordova, or Flutter plugins. | Omni Mobile SDK does not provide any UI elements | .",
+    "url": "http://localhost:4000/requirements-and-limitations/",
+    "relUrl": "/requirements-and-limitations/"
+  }
+  ,"16": {
+    "title": "Create A Token",
+    "content": "Create a Token . To accept a payment, you’ll need to collect information from the customer, tokenize it, and send the token to your server. Your server will then be responsible for using the Fattmerchant API to run the transaction. . Setup . You’ll first need to setup the FattmerchantClient for usage. All you have to do here is set the webPaymentsToken field on the shared FattmerchantConfiguration. FattmerchantClient will then use that configuration by default. . class MyApplication: Application() { override fun onCreate() { super.onCreate() FattmerchantConfiguration.shared.webPaymentsToken = &quot;mywebpaymentstoken&quot; } } . Alternatively, you may create a configuration object and pass it to the new FattmerchantApi instance as you need it. . val config = FattmerchantConfiguration(&quot;https://apidev01.fattlabs.com&quot;, &quot;fattwars&quot;) val client = FattmerchantClient(config) . Collect payment information . You first want to collect credit card information and populate a CreditCard or a BankAccount object. . val creditCard = CreditCard(personName = &quot;Joan Parsnip&quot;, cardNumber = &quot;4111111111111111&quot;, cardExp = &quot;1230&quot;, addressZip = &quot;32822&quot;) // Or for a bank account... val bankAccount = BankAccount(personName = &quot;Jim Parsnip&quot;, bankType = &quot;savings&quot;, bankAccount = &quot;9876543210&quot;, bankRouting = &quot;021000021&quot;, addressZip = &quot;32822&quot;) . Get a payment method token . Once you have a CreditCard object, call the tokenize(:) method on FattmerchantClient object and pass a listener to be notified once tokenization is complete. . var fattClient = FattmerchantClient(config) fattClient.tokenize(card) { (response) in client.tokenize(card, object : FattmerchantClient.TokenizationListener { override fun onPaymentMethodCreated(paymentMethod: PaymentMethod) { // Success! You can now run a transaction with Fattmerchant using paymentToken as the PaymentMethod } override fun onPaymentMethodCreateError(errors: String) { System.out.print(errors) } }) } . . Next: Testing .",
+    "url": "http://localhost:4000/payment-method-tokenization/android/create-a-token",
+    "relUrl": "/payment-method-tokenization/android/create-a-token"
+  }
+  ,"17": {
+    "title": "Installation",
+    "content": "Installation . Jitpack . To install, . Add the JitPack repository to your build file . allprojects { repositories { ... maven { url &#39;https://jitpack.io&#39; } } } . | Add the following line to your build.gradle file . implementation &#39;com.github.fattmerchantorg:fattmerchant-android-sdk:v1.0.4&#39; . | . Next: Create a Token .",
+    "url": "http://localhost:4000/payment-method-tokenization/android/installation",
+    "relUrl": "/payment-method-tokenization/android/installation"
+  }
+  ,"18": {
+    "title": "Taking a Payment",
+    "content": "Taking a Payment . Now that you have the token representing the payment method, you can use the POST /charge resource on the Omni API. this will allow you to create a transaction with the payment method. payment_method_id is a required field, where you will need to pass in the id of the payment method that you received from the tokenize(:) method. . Omni API: Charge a Payment Method .",
+    "url": "http://localhost:4000/payment-method-tokenization/android/taking-a-payment",
+    "relUrl": "/payment-method-tokenization/android/taking-a-payment"
+  }
+  ,"19": {
+    "title": "Testing",
+    "content": "Testing . If you’d like to try tokenization without real payment information, you can use the CreditCard.testCreditCard() or BankAccount.testBankAccount() methods to get a test credit card or bank account. . val creditCard = CreditCard.testCreditCard() val bankAccount = BankAccount.testBankAccount() . If you want to test failures, you can use the following methods . val failingCreditCard = CreditCard.failingTestCreditCard() val failingBankAccount = BankAccount.failingTestBankAccount() . Or you can create the CreditCard or BankAccount object with the following testing payment information: . Credit card numbers . Card Type Good Card Bad Card . VISA | 4111111111111111 | 4012888888881881 | . Mastercard | 5555555555554444 | 5105105105105100 | . Amex | 378282246310005 | 371449635398431 | . Discover | 6011111111111117 | 6011000990139424 | . JCB | 3569990010030400 | 3528327757705979 | . Diners Club | 30569309025904 | 30207712915383 | . Use any CVV number for the above . Bank routing &amp; account numbers . Routing | 021000021 | . Account | 9876543210 | . To test failing bank accounts, use the given routing number and any other account number . . Next: Taking a Payment .",
+    "url": "http://localhost:4000/payment-method-tokenization/android/testing",
+    "relUrl": "/payment-method-tokenization/android/testing"
+  }
+  ,"20": {
+    "title": "Android",
+    "content": "Android Tokenization Guide . Requirements . Android sdk version 21+ | Omni Webpayments Token | . . Get Started .",
+    "url": "http://localhost:4000/payment-method-tokenization/android",
+    "relUrl": "/payment-method-tokenization/android"
+  }
+  ,"21": {
+    "title": "Create A Token",
+    "content": "Create a Token . Setup . You’ll first need to setup the FattmerchantApi for usage. All you have to do here is set the webPaymentsToken field on the shared FattmerchantConfiguration. FattmerchantApi will then use that configuration by default. . import UIKit import Fattmerchant @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate { func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool { FattmerchantConfiguration.shared.webPaymentsToken = &quot;mywebpaymentstoken&quot; return true } } . Alternatively, you may create a configuration object and pass it to the new FattmerchantApi instance as you need it. . let configuration = FattmerchantConfiguration(webPaymentsToken: &quot;mywebpaymentstoken&quot;) let fattClient = FattmerchantApi(configuration: configuration) . Collect payment information . You first want to collect credit card information and instantiate a CreditCard or a BankAccount object. . let card = CreditCard(personName: &quot;Joan Parsnip&quot;, cardNumber: &quot;4111111111111111&quot;, cardExp: &quot;1220&quot;, addressZip: &quot;32814&quot;) // Or for a bank account... let bankAccount = BankAccount(routingNumber: &quot;021000021&quot;, accountNumber: &quot;38294738291937485&quot;, bankHolderType: .personal, accountType: .checking) . Associate a Customer (optional) . If you want to associate a Customer with the new PaymentMethod, set the customerId on the CreditCard or BankAccount . let card = CreditCard(personName: &quot;Joan Parsnip&quot;, cardNumber: &quot;4111111111111111&quot;, cardExp: &quot;1220&quot;, addressZip: &quot;32814&quot;, customerId: &quot;7404cae1-86ba-408c-bb43-8c5cacfdcaab&quot;) . Get a payment method token . Once you have a CreditCard object, call the tokenize(:) method on FattmerchantAPI object and pass a block to run once tokenization is complete. . let fattClient = FattmerchantApi(webPaymentsToken: &quot;mywebpaymentstoken&quot;) fattClient.tokenize(card) { (response) in if case let .success(paymentMethod) = response { let paymentToken = paymentMethod.id print(&quot;I must now use (paymentToken) to create a payment.&quot;) } // Success! You can now run a transaction with Fattmerchant using paymentToken as the PaymentMethod } . Or you can set a delegate to be notified. . class MyClass: FattmerchantApiDelegate { func gottaHaveThatFunc() { // ... let fattClient = FattmerchantApi(webPaymentsToken: &quot;mywebpaymentstoken&quot;) fattClient.delegate = self fattClient.tokenize(card) } func fattmerchantApi(_ fattmerchantApi: FattmerchantApi, didCreatePaymentMethod paymentMethod: PaymentMethod) { let paymentToken = paymentMethod.id // You can now run a transaction with Fattmerchant using paymentToken as the PaymentMethod } func fattmerchantApi(_ fattmerchantApi: FattmerchantApi, didReceiveError: Error) { if case let .tokenizationError(errors) = error { print(&quot;Uh oh! 😡 We got errors!&quot;) errors.forEach { print($0) } } } } . . Next: Testing .",
+    "url": "http://localhost:4000/payment-method-tokenization/ios/create-a-token",
+    "relUrl": "/payment-method-tokenization/ios/create-a-token"
+  }
+  ,"22": {
+    "title": "Installation",
+    "content": "Installation . Use CocoaPods to install the Fattmerchant iOS SDK. . Install CocoaPods | Add pod &#39;Fattmerchant&#39; to your Podfile | Run pod install | . Next: Create a Token .",
+    "url": "http://localhost:4000/payment-method-tokenization/ios/installation",
+    "relUrl": "/payment-method-tokenization/ios/installation"
+  }
+  ,"23": {
+    "title": "Taking a Payment",
+    "content": "Taking a Payment . Now that you have the token representing the payment method, you can use the POST /charge resource on the Omni API. this will allow you to create a transaction with the payment method. payment_method_id is a required field, where you will need to pass in the id of the payment method that you received from the tokenize(:) method. . Omni API: Charge a Payment Method .",
+    "url": "http://localhost:4000/payment-method-tokenization/ios/taking-a-payment",
+    "relUrl": "/payment-method-tokenization/ios/taking-a-payment"
+  }
+  ,"24": {
+    "title": "Testing",
+    "content": "Testing . If you’d like to try tokenization without real payment information, you can use the CreditCard.testCreditCard() or BankAccount.testBankAccount() methods to get a test credit card or bank account. . let creditCard = CreditCard.testCreditCard() let bankAccount = BankAccount.testBankAccount() . If you want to test failures, you can use the following methods . let failingCreditCard = CreditCard.failingTestCreditCard() let failingBankAccount = BankAccount.failingTestBankAccount() . Or you can create the CreditCard or BankAccount object with the following testing payment information: . Credit card numbers . Card Type Good Card Bad Card . VISA | 4111111111111111 | 4012888888881881 | . Mastercard | 5555555555554444 | 5105105105105100 | . Amex | 378282246310005 | 371449635398431 | . Discover | 6011111111111117 | 6011000990139424 | . JCB | 3569990010030400 | 3528327757705979 | . Diners Club | 30569309025904 | 30207712915383 | . Use any CVV number for the above . Bank routing &amp; account numbers . Routing | 021000021 | . Account | 9876543210 | . To test failing bank accounts, use the given routing number and any other account number . . Next: Taking a Payment .",
+    "url": "http://localhost:4000/payment-method-tokenization/ios/testing",
+    "relUrl": "/payment-method-tokenization/ios/testing"
+  }
+  ,"25": {
+    "title": "iOS",
+    "content": "iOS Tokenization Guide . Swift Playground Available . The Omni iOS SDK includes a Swift Playground for you to try. All you need to get started is your webpayments token, provided by your Fattmerchant account manager. This playground, named Tokenization.Playground is located in the project root. . Requirements . Xcode 8+ | iOS 9+ | Omni Webpayments Token | . . Get Started .",
+    "url": "http://localhost:4000/payment-method-tokenization/ios",
+    "relUrl": "/payment-method-tokenization/ios"
+  }
+  ,"26": {
+    "title": "Payment Method Tokenization",
+    "content": "Payment Method Tokenization . The Omni Mobile SDK provides a simple way to accept a payment on your mobile app by providing tokenization of payment methods. By using these tokens instead of card and bank information, you no longer have to worry about sending sensitive card information to your server. . Tokenization for iOS Tokenization for Android",
+    "url": "http://localhost:4000/payment-method-tokenization/",
+    "relUrl": "/payment-method-tokenization/"
+  }
+  
+}
