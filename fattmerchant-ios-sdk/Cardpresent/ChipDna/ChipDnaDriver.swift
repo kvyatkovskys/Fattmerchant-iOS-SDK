@@ -183,8 +183,9 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     let refundRequestParams = CCParameters()
     refundRequestParams[CCParamUserReference] = generateChipDnaTransactionUserReference()
     refundRequestParams[CCParamCardEaseReference] = cardEaseReference
+    refundRequestParams[CCParamTransactionId] = transaction.meta?["nmiTransactionId"] ?? "" as String
     refundRequestParams[CCParamAmount] = Amount(dollars: amountDollars).centsString()
-    refundRequestParams[CCParamCurrency] = "USD"
+//    refundRequestParams[CCParamCurrency] = "USD"
 
     // Do the 3rd party refund
     guard let result = ChipDnaMobile.sharedInstance()?.linkedRefundTransaction(refundRequestParams) else {
@@ -193,7 +194,7 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     }
 
     // Check status
-    if result[CCParamError] != nil {
+    if result[CCParamErrors] != nil {
       error(RefundException.errorRefunding(details: "Error while performing refund"))
     } else {
       var transactionResult = TransactionResult()

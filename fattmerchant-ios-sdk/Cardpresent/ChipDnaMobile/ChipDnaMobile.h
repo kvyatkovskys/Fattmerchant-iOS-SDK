@@ -217,13 +217,39 @@ extern NSString * const CCInitialisationException;
  * <p>{@link CCParameters#CCParamSmsReceiptSupported CCParamSmsReceiptSupported} - When present with the value {@link CCValueTrue TRUE} indicates that centralized SMS receipting is supported with the currently configure terminal.</p>
  * <p>{@link CCParameters#CCParamTippingSupported CCParamTippingSupported} - If present indicates the type of tipping supported with the currently configured terminal. Values can be: {@link CCParameters#CCValueEndOfDayTipping CCValueEndOfDayTipping}, {@link CCParameters#CCValueOnDeviceTipping CCValueOnDeviceTipping}, or {@link CCParameters#CCValueBothTipping CCValueBothTipping}</p>
  * <p>{@link CCParameters#CCParamApplicationIdentifier CCParamApplicationIdentifier} - A string representing the current indentifier for the application.</p>
+ * <p>{@link CCParameters#CCParamMerchantDisplayName CCParamMerchantDisplayName} - If present indicates the currently configured merchant display name.</p>
  */
 -(CCParameters *)getStatus:(CCParameters *)request;
 
 /**
- * Start a transaction. Objects wishing to know the outcomes of transactions should observe for the {@link ChipDnaMobile#addTransactionFinishedTarget:action: transactionFinished} event. Objects can also register to receive updates about on going transactions by observing for {@link ChipDnaMobile#addTransactionUpdateTarget:action: transactionUpdates}.
+ * Get all merchant data in a single call.
  *
- * @param request A parameter collection defining the behaviour of the transaction. It can contain the following parameters:
+ * @param request {@link Parameters} currently not used, can be set to nil.
+ *
+ * @return Parameter collection containing the following:
+ * <p>{@link CCParameters#CCParamResult CCParamResult} defining if the call to getMerchantData was successful using the values {@link CCParameters#CCValueTrue TRUE} and {@link CCParameters#CCValuesFalse FALSE}.</p>
+ * <p>{@link CCParameters#CCParamMerchantData CCParamMerchantData} An XML representation of the {@link MerchantData}. {@link ChipDnaMobileSerializer#deserializeMerchantData:} can be used to retrieve an object.
+ */
+-(CCParameters *)getMerchantData:(CCParameters *)request;
+
+/**
+* Start a transaction. Observe {@link ChipDnaMobile#addTransactionFinishedTarget:action: transactionFinished} to get the transaction results. To receive updates during a transaction observe {@link ChipDnaMobile#addTransactionUpdateTarget:action: transactionUpdates}.
+ *
+ * Before calling {@link ChipDnaMobile#startTransaction:} add an observer and action for
+ * <ul>
+ * <li>(@link ChipDnaMobile#addDeferredAuthorizationTarget)</li>
+ * <li>(@link ChipDnaMobile#addForcedAcceptanceTarget)</li>
+ * <li>(@link ChipDnaMobile#addPartialApprovalTarget)</li>
+ * <li>(@link ChipDnaMobile#addSignatureVerificationTarget)</li>
+ * <li>(@link ChipDnaMobile#addTransactionFinishedTarget)</li>
+ * <li>(@link ChipDnaMobile#addTransactionUpdateTarget)</li>
+ * <li>(@link ChipDnaMobile#addIdVerificationTarget)</li>
+ * <li>(@link ChipDnaMobile#addVoiceReferralTarget)</li>
+ * <li>(@link ChipDnaMobile#addUserNotificationTarget) - recommended for BBPOS Chipper 2X BT</li>
+ * <li>(@link ChipDnaMobile#addCardApplicationSelectionTarget) - required for BBPOS Chipper 2X BT</li>
+ * </ul>
+ *
+ * @param requestParameters {@link CCParameters} collection which can contain:
  * <p>{@link CCParameters#CCParamAmount CCParamAmount} The amount to be used in the transaction.</p>
  * <p>{@link CCParameters#CCParamUserReferrence CCParamUserReference} A unique reference for this transaction.
  * <p>{@link CCParameters#CCParamTransactionType CCParamTransactionType} The transaction type for this transaction. Values can be {@link CCParameters#CCValueSale CCValueSale} or {@link CCParameters#CCValueRefund CCValueRefund}.
@@ -619,7 +645,7 @@ extern NSString * const CCInitialisationException;
 +(void)removeTransactionUpdateTarget:(id)target;
 
 /**
- * Add an observer and action to receive updates on notifications which need to be known to the user after a call to {@link ChipDnaMobile#startTransaction: startTransaction}.
+ * Add an observer and action to receive updates on notifications which need to be shown to the customer after a call to {@link ChipDnaMobile#startTransaction: startTransaction}.
  *
  * When updates are no longer required by an observer a call should be made to {@link ChipDnaMobile#removeUserNotificationTarget: removeUserNotificationTarget}.
  *

@@ -142,6 +142,7 @@ extern NSString * const GratuityNotSupported;                      /**< Gratuity
 extern NSString * const CurrencyNotFound;                          /**< Currency not found in configuration data. */
 extern NSString * const CurrencyNotSet;                            /**< Currency is not set. */
 extern NSString * const CurrencyNotSupportedForPaymentMethod;      /**< Currency is not supported for payment method. */
+extern NSString * const ConfigurationCurrencyNotSet;               /**< Configuration currency is not set. */
 extern NSString * const EndOfDayTippingNotSupported;               /**< End of Day Tipping is not supported */
 extern NSString * const OnDeviceTippingNotSupported;               /**< On Device Tipping is not supported */
 extern NSString * const PinPadCheckRequired;                       /**< A PIN pad check is required. */
@@ -195,6 +196,16 @@ extern NSString * const FailedToRetrieveFirmwareUpdateSessionKeys;  /**< The ses
 extern NSString * const FirmwareUpdateSessionKeyInvalid;            /**< The session key for the firmware update is invalid. */
 extern NSString * const FirmwareFileParsingFailed;                  /**< Failed to parse firmware file. */
 extern NSString * const FirmwareFileDataMissing;                    /**< The firmware file is missing data required for the firmware update. */
+
+extern NSString * const TransactionFinishedObserverRequired;        /**< Method required at least one observer for transaction finished events. @see ChipDnaMobile#addTransactionFinishedTarget:action:*/
+extern NSString * const SignatureVerificationObserverRequired;      /**< Method required at least one observer for signature verfication events. @see ChipDnaMobile#addSignatureVerificationTarget:action:*/
+extern NSString * const VoiceReferralObserverRequired;              /**< Method required at least one observer for voice referral events. @see ChipDnaMobile#addVoiceReferralTarget:action:*/
+extern NSString * const UserNotificationObserverRequired;           /**< Method required at least one observer for user notification events. @see ChipDnaMobile#addUserNotificationTarget:action:*/
+extern NSString * const ApplicationSelectionObserverRequired;       /**< Method required at least one observer for application selection events. @see ChipDnaMobile#addCardApplicationSelectionTarget:action:*/
+extern NSString * const DeferredAuthorizationObserverRequired;      /**< Method required at least one observer for deferred authorization events. @see ChipDnaMobile#addDeferredAuthorizationTarget:action:*/
+extern NSString * const ForcedAcceptanceObserverRequired;           /**< Method required at least one observer for forced acceptance events. @see ChipDnaMobile#addForcedAcceptanceTarget:action:*/
+extern NSString * const SignatureCaptureObserverRequired;           /**< Method required at least one observer for signature capture events. @see ChipDnaMobile#addSignatureCaptureTarget:action:*/
+extern NSString * const PartialApprovalObserverRequired;            /**< Method required at least one observer for partial approval events. @see ChipDnaMobile#addPartialApprovalTarget:action:*/
 
 extern NSString * const TerminalRiskManagementDataFormatError;               /**< There is a format error with the Terminal Risk Management Data. */
 extern NSString * const CountryCodeFormatError;                              /**< There is a format error with the Country Code. */
@@ -316,6 +327,7 @@ extern NSString * const ManualCardDataInputCapabilityFormatError;            /**
 extern NSString * const PanKeyEntrySupportedFormatError;                     /**< There is a format error with PanKeyEntrySupported. */
 extern NSString * const LogFileStoreCountLimitFormatError;                   /**< There is a format error with LogFileStoreCountLimit. */
 extern NSString * const AutoConfirmSupportedFormatError;                     /**< There is a format error with AutoConfirmSupported. */
+extern NSString * const ConfigFileGenerationFailed;                          /**< There is a format error with ConfigFileGeneration. */
 /**
  * @}
  */

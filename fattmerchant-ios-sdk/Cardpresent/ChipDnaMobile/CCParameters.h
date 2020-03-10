@@ -82,7 +82,7 @@ extern CCParameterValue const CCValueOfflineCompletionStateDeleted; /**< @member
  */
 typedef NSString* CCParameterKey;
 extern CCParameterKey const CCParamResult; /**< @memberof CCParameters Parameter key for the result value. */
-extern CCParameterKey const CCParamError; /**< @memberof CCParameters Parameter key used when returning error codes.  Multiple error codes may be returned in a comma separated list. */
+extern CCParameterKey const CCParamErrors; /**< @memberof CCParameters Parameter key used when returning error codes.  Multiple error codes may be returned in a comma separated list. */
 extern CCParameterKey const CCParamErrorDescription; /**< @memberof CCParameters Parameter key for returning text description of an error. */
 
 extern CCParameterKey const CCParamPassword; /**< @memberof CCParameters Parameter key for attempting a password during initialization. */
@@ -258,6 +258,9 @@ extern CCParameterKey const CCParamSelectedCardApplication; /**< @memberof CCPar
 
 extern CCParameterKey const CCParamPANKeyEntry; /**< @memberof CCParameter Parameter key for PAN key entry. Value can be either {@link CCParameters#CCValueTrue TRUE} or {@link CCParameters#CCValueFalse FALSE}. */
 extern CCParameterKey const CCParamAutoConfirm; /**< @memberof CCParameter Parameter key to trigger auto confirmation of a transaction. Value can be either {@link CCParameters#CCValueTrue TRUE} or {@link CCParameters#CCValueFalse FALSE}.*/
+
+extern CCParameterKey const CCParamMerchantData; /**< @memberof CCParameter Parameter key for the merchant data.*/
+extern CCParameterKey const CCParamMerchantDisplayName; /**< @memberof CCParameter Parameter key for configured merchant display name. The default name displayed on the PIN pad when it is idle. */
 
 /**
  * @}
