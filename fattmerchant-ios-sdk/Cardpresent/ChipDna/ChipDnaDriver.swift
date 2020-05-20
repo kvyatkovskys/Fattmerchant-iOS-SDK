@@ -18,6 +18,9 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     var connectionType: String
   }
 
+  /// The place where the transactions take place
+  static var source: String = "NMI"
+
   /// Listens to the transaction events of ChipDna
   fileprivate var chipDnaTransactionListener = ChipDnaTransactionListener()
 
@@ -26,6 +29,8 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
 
   /// A block to run after self receives the connect and configure callback from ChipDna
   fileprivate var didConnectAndConfigure: ((Bool) -> Void)?
+
+  var familiarSerialNumbers: [String] = []
 
   /// Attempts to initialize the ChipDNA SDK
   ///
@@ -36,7 +41,8 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     guard
       let appId = args["appId"] as? String,
       let merchant = args["merchant"] as? Merchant,
-      let apiKey = merchant.emvPassword()
+      let apiKey = merchant.emvPassword(),
+      !apiKey.isEmpty
       else {
         completion(false)
         return
@@ -63,6 +69,10 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     }
 
     completion(true)
+  }
+
+  func isInitialized(completion: @escaping (Bool) -> Void) {
+    completion(ChipDnaMobile.isInitialized())
   }
 
   /// Checks if ChipDna is ready to take a payment
@@ -120,7 +130,12 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
     requestParams[CCParamPinPadConnectionType] = CCValueBluetooth
     ChipDnaMobile.sharedInstance()?.setProperties(requestParams)
     ChipDnaMobile.addConnectAndConfigureFinishedTarget(self, action: #selector(onConnectAndConfigure(parameters:)))
-    didConnectAndConfigure = completion
+    didConnectAndConfigure = { connected in
+      if connected, let serial = reader.serialNumber {
+        self.familiarSerialNumbers.append(serial)
+      }
+      completion(connected)
+    }
     ChipDnaMobile.sharedInstance()?.connectAndConfigure(requestParams)
   }
 
@@ -171,6 +186,7 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
       let success = result[CCParamTransactionResult] == CCValueApproved
 
       var transactionResult = TransactionResult()
+      transactionResult.source = Self.source
       transactionResult.request = request
       transactionResult.success = success
       transactionResult.maskedPan = result[CCParamMaskedPan]
@@ -234,6 +250,7 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
       error(RefundException.errorRefunding(details: "Error while performing refund"))
     } else {
       var transactionResult = TransactionResult()
+      transactionResult.source = Self.source
       transactionResult.success = true
       transactionResult.transactionType = "refund"
       transactionResult.amount = refundAmount
@@ -256,6 +273,7 @@ class ChipDnaDriver: NSObject, MobileReaderDriver {
       let success = result[CCParamTransactionResult] == CCValueApproved
 
       var transactionResult = TransactionResult()
+      transactionResult.source = Self.source
       transactionResult.request = request
       transactionResult.success = success
       transactionResult.maskedPan = result[CCParamMaskedPan]
