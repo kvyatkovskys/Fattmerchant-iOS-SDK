@@ -18,7 +18,7 @@ public enum Environment {
     case .DEV:
       return "https://apidev.fattlabs.com"
     case .LIVE:
-      return "https://apiprod.fattlabs.com"
+      return "https://09a5d32b7486.ngrok.io"
     }
   }
 
